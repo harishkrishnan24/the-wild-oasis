@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 const Row = styled.div`
   display: flex;
+
   ${(props) =>
     props.type === "horizontal" &&
     css`
@@ -14,7 +15,6 @@ const Row = styled.div`
     css`
       flex-direction: column;
       gap: 1.6rem;
-      justify-content: space-between;
     `}
 `;
 

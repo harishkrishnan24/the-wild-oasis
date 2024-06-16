@@ -16,7 +16,7 @@ import Tag from "../../ui/Tag";
 
 import { format, isToday } from "date-fns";
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
-// import { useCheckout } from "../check-in-out/useCheckout";
+import { useCheckout } from "../check-in-out/useCheckout";
 // import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
@@ -61,7 +61,7 @@ function BookingRow({
   },
 }) {
   // const { mutate: deleteBooking, isLoading: isDeleting } = useDeleteBooking();
-  // const { mutate: checkout, isLoading: isCheckingOut } = useCheckout();
+  const { checkout, isCheckingOut } = useCheckout();
 
   const navigate = useNavigate();
 
@@ -119,8 +119,8 @@ function BookingRow({
 
             {status === "checked-in" && (
               <Menus.Button
-                // onClick={() => checkout(bookingId)}
-                // disabled={isCheckingOut}
+                onClick={() => checkout(bookingId)}
+                disabled={isCheckingOut}
                 icon={<HiArrowUpOnSquare />}
               >
                 Check out
@@ -128,9 +128,9 @@ function BookingRow({
             )}
 
             <Menus.Button icon={<HiPencil />}>Edit booking</Menus.Button>
-            <Modal.Toggle opens="delete">
+            <Modal.Open opens="delete">
               <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
-            </Modal.Toggle>
+            </Modal.Open>
           </Menus.List>
         </Menus.Menu>
 

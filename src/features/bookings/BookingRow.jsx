@@ -17,7 +17,7 @@ import Tag from "../../ui/Tag";
 import { format, isToday } from "date-fns";
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
 import { useCheckout } from "../check-in-out/useCheckout";
-// import { useDeleteBooking } from "./useDeleteBooking";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -49,18 +49,16 @@ const Amount = styled.div`
 function BookingRow({
   booking: {
     id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
     guests: { fullName: guestName, email },
     cabins: { name: cabinName },
   },
 }) {
-  // const { mutate: deleteBooking, isLoading: isDeleting } = useDeleteBooking();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
   const { checkout, isCheckingOut } = useCheckout();
 
   const navigate = useNavigate();
@@ -137,8 +135,8 @@ function BookingRow({
         <Modal.Window name="delete">
           <ConfirmDelete
             resource="booking"
-            // onConfirm={(options) => deleteBooking(bookingId, options)}
-            // disabled={isDeleting}
+            onConfirm={(options) => deleteBooking(bookingId, options)}
+            disabled={isDeleting}
           />
         </Modal.Window>
       </Modal>
